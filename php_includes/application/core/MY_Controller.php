@@ -25,6 +25,12 @@ class MY_Controller extends CI_Controller {
 	protected $user = '';
 
 	/**
+	 * Array of templates to be loaded
+	 * @var array
+	 */
+	protected $mustache_templates;
+
+	/**
 	 * We will override the Constructor if we need anything on construct
 	 *
 	 * @return void
@@ -54,8 +60,14 @@ class MY_Controller extends CI_Controller {
 	 * @param mixed $return
 	 */
 	public function render($view = '', $vars = array(), $return = FALSE) {
+
+		// get user session
+		$this->user = $this->session->user_session;
+
 		// header variables with the navigation bars
-		$header_vars = array();
+		$header_vars = array(
+			'user' => $this->user
+		);
 
 		// header
 		$this->load->view($this->folder . '/common/header', $header_vars, $return);

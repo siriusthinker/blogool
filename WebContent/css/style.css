@@ -4832,3 +4832,49 @@ div.g-signin2 > div {
 	margin: 10px auto;
 }
 /* end */
+
+/* Markdown Editor */
+.editor-container textarea {
+	resize: none;
+	padding: 10px;
+	height: 97%;
+	max-height: 97%;
+	width: 100%;
+	background: #bbb;
+	color: #000;
+}
+
+.preview-container #preview {
+	height: 97%;
+	max-height: 97%;
+	border: 1px solid #a7a0a0;
+	overflow-y: scroll;
+	width: 100%;
+	padding: 10px;
+}
+/* end */
+
+/* Posts */
+li.post-item {
+	padding: 2rem 6rem;
+}
+
+li.post-item article {
+	padding: 10px 0px;
+}
+
+.pagination {
+	margin-right: 15px;
+}
+
+.pagination a, .pagination strong {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}

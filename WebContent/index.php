@@ -1,4 +1,8 @@
 <?php
+
+// declare the TIMEZONE for php
+date_default_timezone_set('America/New_York');
+
 /**
  * CodeIgniter
  *

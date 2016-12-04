@@ -48,7 +48,7 @@ class Seeder extends CI_Controller {
 
 		echo "seeding $limit posts";
 
-		$fwrite = fopen($this->directory . 'test_data/posts.sql', 'w+');
+		$fwrite = fopen($this->directory . 'test_data/posts2.sql', 'w+');
 
 		// create a bunch of fake blog posts
 		for ($i = 1; $i <= $limit; $i++) {
@@ -72,9 +72,11 @@ class Seeder extends CI_Controller {
 			$user_id = rand(99999, 100099);
 			$post_state_id = rand(1, 3);
 			$data = $this->db->escape($data);
+			$date_created = $this->faker->dateTimeThisYear->format('Y-m-d H:i:s');
+			$date_updated = $this->faker->dateTimeThisYear->format('Y-m-d H:i:s');
 
 			// add the post to the file
-			$post = "INSERT INTO posts (`id`, `content`, `user_id`, `post_state_id`) VALUES ('{$i}', {$data}, '{$user_id}', '{$post_state_id}');\n";
+			$post = "INSERT INTO posts (`id`, `content`, `user_id`, `post_state_id`, `date_created`, `date_updated`) VALUES ('{$i}', {$data}, '{$user_id}', '{$post_state_id}', '{$date_created}', '{$date_updated}');\n";
 
 			// write to file
 			fwrite($fwrite, $post);

@@ -5,7 +5,7 @@
 		return methods[ action ].call(this, args);
 	};
 
-	// declare Login methods
+	// declare User methods
 	var methods = {
 		// handles the login event
 		login: function(options){
@@ -31,8 +31,9 @@
 
 			// handle the response
 			transport.on('success', function(response, status, xhr){
-				// display result as datatable
-				//$(document).User('table', response.results);
+				if(response.status === 200) {
+					window.location = "/";
+				}
 			});
 		}
 	};
@@ -48,6 +49,8 @@ function onSignIn(googleUser) {
 	// get the id token for the current session
 	var id_token = googleUser.getAuthResponse().id_token;
 
-	// call login method for server side authentication
-	$(document).User('login', {id_token: id_token});
+	if($("#editor-page").length === 0) {
+		// call login method for server side authentication
+		$(document).User('login', {id_token: id_token});
+	}
 }

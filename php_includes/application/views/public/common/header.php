@@ -14,14 +14,16 @@
 	<link href="<?php echo base_url('css/style.css')?>" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div class="public-header">
+	<div class="account-header">
 		<div class="site-brand">
-			<a href="<?php echo base_url(); ?>">
-				<img src="<?php echo base_url('images/logo2.png')?>" class="site-logo" title="Blogool" />
-			</a>
+			<div>
+				<a href="<?php echo base_url(); ?>">
+					<img src="<?php echo base_url('images/logo2.png')?>" class="site-logo" title="Blogool" />
+				</a>
+			</div>
 		</div>
 		<div class="site-navigation">
-			<ul class="public-menu">
+			<ul class="account-menu">
 				<?php if (is_object($user) !== true) { ?>
 					<li><div class="g-signin2" data-onsuccess="onSignIn" data-height="30"></div></li>
 				<?php } else {  ?>
@@ -30,11 +32,6 @@
 							<?php echo $user->first_name . ' ' . $user->last_name; ?> <span class="caret"></span>
 						</a>
 						<ul class="dropdown-content">
-							<li>
-								<a href="<?php echo VIEW_DOMAIN_PROTOCOL . 'accounts.' . VIEW_DOMAIN ?>">
-									<i class="fa fa-user" aria-hidden="true"></i>Account
-								</a>
-							</li>
 							<li>
 								<a href="<?php echo base_url('login/logout'); ?>">
 									<i class="fa fa-sign-out" aria-hidden="true"></i>Logout
@@ -46,3 +43,37 @@
 			</ul>
 		</div>
 	</div>
+
+	<div class="account-sidebar">
+		<ul class="modules-list">
+			<li>
+				<a href="#" class="parent_menu homepage-list">
+					<div class="pull-left">
+						<i class="fa fa-feed" aria-hidden="true"></i> Recent Posts
+					</div>
+					<div class="clear">&nbsp;</div>
+				</a>
+			</li>
+			<?php if (is_object($user) === true) { ?>
+			<li>
+				<a href="#" class="parent_menu dashboard-list">
+					<div class="pull-left">
+						<i class="fa fa-dashboard" aria-hidden="true"></i> Dashboard
+					</div>
+					<div class="clear">&nbsp;</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="parent_menu markdown-list">
+					<div class="pull-left">
+						<i class="fa fa-edit" aria-hidden="true"></i> Markdown Editor
+					</div>
+					<div class="clear">&nbsp;</div>
+				</a>
+			</li>
+			<?php } ?>
+		</ul>
+	</div>
+
+	<div class="account-content-container">
+		<div class="account-content">

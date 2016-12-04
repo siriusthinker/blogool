@@ -33,5 +33,5 @@ cd "`dirname "$0"`"
 # start importing the schema and control data
 #
 mysql -u $DB_USER --password=$DB_PASS $DB_NAME < ../../database/test_data/users.sql
-mysql -u $DB_USER --password=$DB_PASS $DB_NAME < ../../database/test_data/posts.sql
+mysql -u $DB_USER --password=$DB_PASS $DB_NAME < ../../database/test_data/posts2.sql
 

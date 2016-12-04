@@ -92,6 +92,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 */
 define('SITE_NAME', 'BLOGOOL');
 define('BASE_URL', 'http://blogool.siriusthinker.com');
+define('DEFAULT_PAGE_LIMIT', 5);
 
 /*
  |--------------------------------------------------------------------------
@@ -113,4 +114,12 @@ define('DB_USERNAME', 'blogool');
 define('DB_PASSWORD', 'TLPxtdZqboRh');
 define('DB_DATABASE', 'blogool');
 
-
+/*
+ |--------------------------------------------------------------------------
+ | Database Tables
+ |--------------------------------------------------------------------------
+ |
+*/
+define('POSTS', 'posts');
+define('POST_STATES', 'post_states');
+define('USERS', 'users');
