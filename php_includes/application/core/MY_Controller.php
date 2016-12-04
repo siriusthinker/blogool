@@ -13,6 +13,11 @@ class MY_Controller extends CI_Controller {
 	public $folder;
 
 	/**
+	 * @var Google_Client $client
+	 */
+	public $client;
+
+	/**
 	 * Current User details
 	 *
 	 * @var string $user
@@ -31,6 +36,11 @@ class MY_Controller extends CI_Controller {
 
 		// load models
 		//$this->load->model('User_Model', 'user_model');
+
+		// initialize google client
+		$this->client = new Google_Client();
+		$this->client->setClientId(GOOGLE_API_CLIENT_ID);
+		$this->client->setClientSecret(GOOGLE_API_CLIENT_SECRET);
 
 		// default view folder
 		$this->folder = 'public';

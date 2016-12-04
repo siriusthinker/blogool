@@ -17,7 +17,6 @@
 
 			// set the request data
 			transport.set_request_data({
-				user_data: options[0].user_data,
 				id_token: options[0].id_token
 			});
 
@@ -33,35 +32,22 @@
 			// handle the response
 			transport.on('success', function(response, status, xhr){
 				// display result as datatable
-				$(document).User('table', response.results);
+				//$(document).User('table', response.results);
 			});
 		}
 	};
 })(jQuery);
 
-
 /**
-* Called upon clicking the Google signin button
+* Called on successful signin
 * @param {Object} googleUser
 * @return void
 */
 function onSignIn(googleUser) {
-	// get the user's basic profile data
-	var user_profile = googleUser.getBasicProfile();
-
-	// set user_data
-	var user_data = {
-		id: user_profile.getId(),
-		name: user_profile.getName(),
-		given_name: user_profile.getGivenName(),
-		family_name: user_profile.getFamilyName(),
-		image_url: user_profile.getImageUrl(),
-		email: user_profile.getEmail()
-	};
 
 	// get the id token for the current session
 	var id_token = googleUser.getAuthResponse().id_token;
 
 	// call login method for server side authentication
-	$(document).User('login', {user_data: user_data, id_token: id_token});
+	$(document).User('login', {id_token: id_token});
 }

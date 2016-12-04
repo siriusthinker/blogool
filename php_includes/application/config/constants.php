@@ -101,3 +101,16 @@ define('BASE_URL', 'http://blogool.siriusthinker.com');
 */
 define('GOOGLE_API_CLIENT_ID', '994709089479-1pfs928b5fo3qgeg9u54sblad27i7306.apps.googleusercontent.com');
 define('GOOGLE_API_CLIENT_SECRET', 'B0GlUR0iwTqztaDpx9_UURhA');
+
+/*
+ |--------------------------------------------------------------------------
+ | DB Credentials
+ |--------------------------------------------------------------------------
+ |
+*/
+define('DB_HOSTNAME', 'localhost');
+define('DB_USERNAME', 'blogool');
+define('DB_PASSWORD', 'TLPxtdZqboRh');
+define('DB_DATABASE', 'blogool');
+
+

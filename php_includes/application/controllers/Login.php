@@ -12,9 +12,6 @@ class Login extends MY_Controller {
 
 		// load required models
 		$this->load->model('User_Model', 'user_model');
-
-		// load required libraries
-		require_once(APPPATH . 'libraries/vendor/autoload.php');
 	}
 
 	/**
@@ -28,9 +25,8 @@ class Login extends MY_Controller {
 
 		try {
 
-			// call method to authenticate user
-			$data["result"] = $this->user_model->authenticate($this->input->post());
-
+			// call method to verify the id token from the client
+			$data["result"] = $this->user_model->verify($this->input->post('id_token'));
 			$data['status'] = 200;
 		} catch(Exception $e) {
 			$data['status'] = 500;

@@ -38,6 +38,7 @@ class ComposerStaticInit56ec6d881dfdb1ac43c1f1249b68f9d3
         'F' => 
         array (
             'Firebase\\JWT\\' => 13,
+            'Faker\\' => 6,
         ),
     );
 
@@ -81,6 +82,10 @@ class ComposerStaticInit56ec6d881dfdb1ac43c1f1249b68f9d3
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
     );
 

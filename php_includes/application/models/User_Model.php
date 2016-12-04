@@ -15,16 +15,25 @@ class User_Model extends CI_Model {
 	}
 
 	/**
-	 * @method authenticate
-	 * @return stdClass $result
+	 * @method verify
+	 * Verifies the id token passed during client login
+	 *
+	 * @param $id_token ID token of the logged in user
+	 * @throws InvalidArgumentException if parameter $id_token is invalid or length is < 1
+	 * @return array $token
 	 */
-	public function authenticate ($data) {
-		$client = new Google_Client();
-		$client->setClientId(GOOGLE_API_CLIENT_ID);
-		$client->setClientSecret(GOOGLE_API_CLIENT_SECRET);
+	public function verify($id_token) {
+		// verify if parameter $id_token meets the expected contract
+		if(is_string($id_token) !== true || strlen(trim($id_token)) <1) {
+			throw new InvalidArgumentException("Invalid Parameter 'id_token'. Must be a string with length > 0.");
+		}
 
-		$token_data = $client->verifyIdToken($data['id_token']);
+		// verify the id token passed during login
+		$token = $this->client->verifyIdToken($id_token);
 
-		return $token_data;
+		//$user = $this->read($token);
+		return $token;
 	}
+
+
 }
