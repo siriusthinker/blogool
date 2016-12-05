@@ -88,7 +88,7 @@ class Post_Model extends CI_Model {
 	 *
 	 * @param array $options - query options
 	 * @throws InvalidArgumentException if $options is not an array or is null
-	 *
+	 * @throws RuntimeException if query fails to execute
 	 * @return array $result
 	 */
 	public function read_by_user($options) {
@@ -98,24 +98,8 @@ class Post_Model extends CI_Model {
 		}
 
 		// verify $options['offset'] meets expected contract
-		if(is_int($options['offset']) !== true || $options['offset'] < 0) {
-			throw new InvalidArgumentException('Invalid index "offset" passed. Must be an integer with value > 0.');
-		}
-
-		// verify $options['limit'] meets expected contract
-		if(is_int($options['limit']) !== true || $options['limit'] < 0) {
-			throw new InvalidArgumentException('Invalid index "limit" passed. Must be an integer with value > 0.');
-		}
-
-		// verify $options['offset'] meets expected contract
 		if(is_int($options['user_id']) !== true || $options['user_id'] < 0) {
 			throw new InvalidArgumentException('Invalid index "user_id" passed. Must be an integer with value > 0.');
-		}
-
-		// set limit string
-		$limit_str = '';
-		if($options['limit'] > 0) {
-			$limit_str = "LIMIT {$options['offset']}, {$options['limit']}";
 		}
 
 		// set query string
@@ -154,5 +138,139 @@ class Post_Model extends CI_Model {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @method delete
+	 * Deletes a record
+	 *
+	 * @param int $post_id ID of the post to be deleted
+	 * @param int $user_id ID of the currently logged in user
+	 * @throws InvalidArgumentException if $options is not an array or is null
+	 * @return bool
+	 */
+	public function delete($post_id, $user_id) {
+		// verify $post_id meets expected contract
+		if(is_int($post_id) !== true || $post_id < 0) {
+			throw new InvalidArgumentException('Invalid index "post_id" passed. Must be an integer with value > 0.');
+		}
+
+		// verify $user_id meets expected contract
+		if(is_int($user_id) !== true || $user_id < 0) {
+			throw new InvalidArgumentException('Invalid index "user_id" passed. Must be an integer with value > 0.');
+		}
+
+		// set query string
+		$sql = "
+			DELETE
+			FROM
+				" . POSTS . "
+			WHERE
+				" . POSTS . ".`id` = " . $this->db->escape($post_id) . "
+			AND
+				" . POSTS . ".`user_id` = " . $this->db->escape($user_id) . "
+		";
+
+		// execute query
+		$query = $this->db->query($sql);
+
+		return true;
+	}
+
+	/**
+	 * @method delete
+	 * Deletes a record
+	 *
+	 * @param int $post_id ID of the post to be deleted
+	 * @param string $status Status of the post
+	 * @param int $user_id ID of the currently logged in user
+	 * @throws InvalidArgumentException if $options is not an array or is null
+	 * @return bool
+	 */
+	public function update($post_id, $status, $user_id) {
+		// verify $post_id meets expected contract
+		if(is_int($post_id) !== true || $post_id < 0) {
+			throw new InvalidArgumentException('Invalid index "post_id" passed. Must be an integer with value > 0.');
+		}
+
+		// verify if parameter $status meets the expected contract
+		if(is_string($status) !== true || strlen(trim($status)) < 1) {
+			throw new InvalidArgumentException("Invalid Parameter 'status'. Must be a string with length > 0.");
+		}
+
+		// verify $user_id meets expected contract
+		if(is_int($user_id) !== true || $user_id < 0) {
+			throw new InvalidArgumentException('Invalid index "user_id" passed. Must be an integer with value > 0.');
+		}
+
+		// set query string
+		$sql = "
+			UPDATE
+				`". POSTS."`
+			SET
+				" . POSTS . ".`post_state_id` = (
+					SELECT
+						`". POST_STATES ."`.`id`
+					FROM
+						`". POST_STATES."`
+					WHERE
+						`". POST_STATES ."`.`name` = " . $this->db->escape($status) . "
+				),
+				" . POSTS . ".`date_created` = CURRENT_TIMESTAMP
+			WHERE
+				" . POSTS . ".`id` = " . $this->db->escape($post_id) . "
+			AND
+				" . POSTS . ".`user_id` = " . $this->db->escape($user_id) . "
+		";
+
+		// execute query
+		$query = $this->db->query($sql);
+
+		return true;
+	}
+
+	/**
+	 * @method create
+	 * Insert a new entry in DB
+	 *
+	 * @param string $content Post content
+	 * @param int $user_id ID of the currently logged in user
+	 * @throws InvalidArgumentException if parameter $content is invalid
+	 * @return int $id
+	 */
+	public function create($content, $user_id) {
+		// verify if parameter $content meets the expected contract
+		if(is_string($content) !== true || strlen(trim($content)) < 1) {
+			throw new InvalidArgumentException("Invalid Parameter 'content'. Must be a string with length > 0.");
+		}
+
+		// verify $user_id meets expected contract
+		if(is_int($user_id) !== true || $user_id < 0) {
+			throw new InvalidArgumentException('Invalid index "user_id" passed. Must be an integer with value > 0.');
+		}
+
+		// set query string
+		$sql = "
+			INSERT INTO `" . POSTS . "`
+			(
+				`content`,
+				`user_id`,
+				`post_state_id`,
+				`date_created`
+			)
+			VALUES
+			(
+				" . $this->db->escape($content) . ",
+				" . $this->db->escape($user_id) . ",
+				2,
+				CURRENT_TIMESTAMP
+			)
+		";
+
+		// execute query
+		$query = $this->db->query($sql);
+
+		// return id
+		return $this->db->insert_id();
 	}
 }

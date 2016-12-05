@@ -7,7 +7,7 @@
 
 	// declare Post methods
 	var methods = {
-		// handles the login event
+		// fetch recent posts
 		recent: function(options){
 			// set the url for ajax request
 			var url = location.origin + '/index/post';

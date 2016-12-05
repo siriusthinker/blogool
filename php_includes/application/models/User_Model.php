@@ -79,7 +79,7 @@ class User_Model extends CI_Model {
 	 *
 	 * @param array $data User data from the google client
 	 * @throws InvalidArgumentException if parameter $data is invalid
-	 * @return int $user_id
+	 * @return stdClass $user
 	 */
 	public function create($data) {
 		// verify if parameter $data meets the expected contract
@@ -110,7 +110,21 @@ class User_Model extends CI_Model {
 		// execute query
 		$query = $this->db->query($sql);
 
-		// get the result
+		$user_id = $this->db->insert_id();
+
+		// set query string
+		$sql = "
+			SELECT
+				" . USERS . ".*
+			FROM
+				" . USERS . "
+			WHERE
+				" . USERS . ".`id` = " . $this->db->escape($user_id) . "
+		";
+
+		// execute query
+		$query = $this->db->query($sql);
+
 		$user = $query->row();
 
 		// return user details
