@@ -1,4 +1,8 @@
 <?php
+
+// declare the TIMEZONE for php
+date_default_timezone_set('America/New_York');
+
 /**
  * CodeIgniter
  *
@@ -129,7 +133,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$view_folder = '';
+	$view_folder = '../php_includes/application/views';
 
 
 /*
@@ -304,6 +308,13 @@ switch (ENVIRONMENT)
 	}
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE COMPOSER AUTOLOAD FILE
+ * --------------------------------------------------------------------
+ */
+include_once(APPPATH . 'libraries/vendor/autoload.php');
 
 /*
  * --------------------------------------------------------------------

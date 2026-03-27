@@ -83,3 +83,43 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+ |--------------------------------------------------------------------------
+ | Website Specific Configs
+ |--------------------------------------------------------------------------
+ |
+*/
+define('SITE_NAME', 'BLOGOOL');
+define('BASE_URL', 'http://blogool.siriusthinker.com');
+define('DEFAULT_PAGE_LIMIT', 5);
+
+/*
+ |--------------------------------------------------------------------------
+ | Google API Credentials
+ |--------------------------------------------------------------------------
+ |
+*/
+define('GOOGLE_API_CLIENT_ID', '994709089479-1pfs928b5fo3qgeg9u54sblad27i7306.apps.googleusercontent.com');
+define('GOOGLE_API_CLIENT_SECRET', 'B0GlUR0iwTqztaDpx9_UURhA');
+
+/*
+ |--------------------------------------------------------------------------
+ | DB Credentials
+ |--------------------------------------------------------------------------
+ |
+*/
+define('DB_HOSTNAME', 'localhost');
+define('DB_USERNAME', 'blogool');
+define('DB_PASSWORD', 'TLPxtdZqboRh');
+define('DB_DATABASE', 'blogool');
+
+/*
+ |--------------------------------------------------------------------------
+ | Database Tables
+ |--------------------------------------------------------------------------
+ |
+*/
+define('POSTS', 'posts');
+define('POST_STATES', 'post_states');
+define('USERS', 'users');
